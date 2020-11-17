@@ -18,7 +18,7 @@ class App extends Component {
         const amORPm = hours >= 12?"PM":"AM";
         const twelveHourFormat = hours>12 ? hours-12:hours;
         
-        let timeString = `${pad(twelveHourFormat)}:${pad(minutes)}:{pad(seconds)}${amORPm}`;
+        let timeString = `${pad(twelveHourFormat)}:${pad(minutes)}:${pad(seconds)}${amORPm}`;
         return timeString;
     }
     componentDidMount(){
