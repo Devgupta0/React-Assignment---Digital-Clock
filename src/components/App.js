@@ -9,6 +9,29 @@ class App extends Component {
         };
         this.intervalId = null;
     } 
+    
+    
+    getTimeString(){
+        const currTime = this.state.time;
+        const pad = (x) => x.toString().padStart(2,"0");
+        const [hours,minutes,seconds] = [currTime.getHours(),currTime.getMinutes(),currTime.getSeconds()];
+        const amORPm = hours >= 12?"PM":"AM";
+        const twelveHourFormat = hours>12 ? hours-12:hours;
+        
+        const timeString = `${pad(twelveHourFormat)}:${pad(minutes)}:{pad(seconds)}${amORPm}`;
+        return timeString;
+    }
+    componentDidMount(){
+            this.intervalId = setInterval(() =>{
+                this.setState({
+                    time: new Date()
+                })
+            },1*1000);
+
+        }
+    componentWillUnmount(){
+        clearInterval(this.intervalId);
+    }
     render() {
 
         return(
@@ -16,32 +39,6 @@ class App extends Component {
                <h3 id="time">{this.getTimeString()}</h3>
             </div>
         );
-    }
-    componentDidMount(){
-        this.intervalId = setInterval(() =>{
-            this.setState({
-                time: new Date()
-            })
-        },1*1000);
-        
-    }
-    componentWillUnmount(){
-        clearInterval(this.intervalId);
-    }
-    getTimeString(){
-        const currTime = this.state.time;
-        const [hours,minutes,seconds] = [currTime.getHours(),currTime.getMinutes(),currTime.getSeconds()];
-        const amORPm = hours >= 12?"PM":"AM";
-        const twelveHourFormat = hours>12 ? hours-12:hours;
-        const hourString = this.padNumberToTwoDigit(twelveHourFormat);
-        const minuteString = this.padNumberToTwoDigit(minutes);
-        const secondString = this.padNumberToTwoDigit(seconds);
-
-        const timeString = `${hourString}:${minuteString}:${secondString}${amORPm}`;
-        return timeString;
-    }
-    padNumberToTwoDigit(num){
-        return `${num<10 ? "0":""}${num}`;
     }
 }
 
