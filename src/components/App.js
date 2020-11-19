@@ -26,10 +26,10 @@ class App extends Component {
     componentWillUnmount(){
         clearInterval(this.intervalId);
     }
-    getTimeString(){
-        const timeString = this.state.time;
-        return timeString;
-    }
+//     getTimeString(){
+//         const timeString = this.state.time;
+//         return timeString;
+//     }
     padNumber(num){
         return num<10?"0"+num:num.toString();
     }
